@@ -6,7 +6,7 @@ GO
 --1
 -- Returns table with clients phone number of lawyer.
 --Lawyers Id is taken as paramerter.
-CREATE OR ALTER PROCEDURE GetClientsOfLawyer
+CREATE OR ALTER PROCEDURE sp_GetClientsOfLawyer
 	(@LawyerId int)
 	AS
 	BEGIN
@@ -19,28 +19,32 @@ CREATE OR ALTER PROCEDURE GetClientsOfLawyer
 
 	END
 
-exec GetClientsOfLawyer 22
+exec sp_GetClientsOfLawyer 1
 
 --2
--- Returns table with cases of lawyer.
---Lawyers Id is taken as paramerter.
-CREATE OR ALTER PROCEDURE GetCasesOfLawyer
+-- Returns table with unresolved cases of lawyer, and the last 
+--trials date of cases. Lawyers Id is taken as paramerter.
+CREATE OR ALTER PROCEDURE sp_GetUnresolvedCasesOfLawyer
 	(@LawyerId int)
 	AS
 	BEGIN
 	
-	SELECT c.CaseNo
+	SELECT c.CaseNo, MAX(t.TrialDate) AS LatestTrialDate
 	FROM [Case] c
 	inner join AssosiatedLawyer al on c.CaseNo = al.CaseNo
+	inner join AssociatedCase ac on ac.CaseNo = c.CaseNo
+	inner join Trial t on t.TrialNo = ac.TrialNo
 	WHERE 	al.LawyerNo = @LawyerId
+			AND c.IsResolved = 0
+	GROUP BY c.CaseNo
 	
 	END
 
-exec GetCasesOfLawyer 1
+exec sp_GetUnresolvedCasesOfLawyer 2
  
 -- 3
 -- This function shows remaining debt of the customer.
-CREATE OR ALTER PROCEDURE RemainingDebt
+CREATE OR ALTER PROCEDURE sp_RemainingDebt
 	(@CustomerId int)
 	AS
 	DECLARE
@@ -66,13 +70,13 @@ CREATE OR ALTER PROCEDURE RemainingDebt
 			print 'You have ' + CAST(DATEDIFF(MONTH,GETDATE(),@LastDate) AS varchar(5)) + ' months left to pay. Your debt:' +  CAST(@Debt AS varchar(10))
 	END
 
-exec RemainingDebt 1001
-exec RemainingDebt 1003
+exec sp_RemainingDebt 1001
+exec sp_RemainingDebt 1004
 
 -- 4
 -- This function changes lawyer of given case.
 --Two lawyer Ids are given as parameter. 
-CREATE OR ALTER PROCEDURE spChangeLawyerAtCase
+CREATE OR ALTER PROCEDURE sp_ChangeLawyerAtCase
 	(@OldLawyerId int, @NewLawyerId int, @CaseId int)
 	AS
 	DECLARE
@@ -107,7 +111,8 @@ CREATE OR ALTER PROCEDURE spChangeLawyerAtCase
 		print 'Lawyers are changed'
 	END
 
-exec spChangeLawyerAtCase 13, 10, 1050
+SELECT * FROM AssosiatedLawyer
+exec sp_ChangeLawyerAtCase 14, 13, 1100
 
 -- 5
 -- Manager can check his lawyers and number of cases they are working on
@@ -144,7 +149,7 @@ CREATE OR ALTER PROCEDURE sp_GetCustomersInDebt
 		ORDER BY p.LastDateOfPayment DESC
 	END
 
-exec sp_GetCustomersInDebt 5, '2025-01-30'
+exec sp_GetCustomersInDebt 3, '2024-01-30'
 
 -- 7
 -- Returns list of case types and how many clients company have in this case type.
@@ -255,8 +260,8 @@ CREATE OR ALTER PROCEDURE sp_MakeTransaction
 			print 'Client ' + CAST(@ClientNo AS varchar(6)) + ' has ' + CAST(FORMAT (@LeftAmountOfDebt, 'N2') AS nvarchar(10)) + ' dollars remaining debt'
 
 	END
-
 exec sp_MakeTransaction 5193827064560296703924404416, 5000, 6990
+SELECT * FROM [Transaction]
 
 -- 11
 -- Manager can appoint trial to their own representatives
@@ -289,7 +294,9 @@ CREATE OR ALTER PROCEDURE sp_AppointTrial
 		print 'Appointment is done'
 		
 	END
+SELECT * FROM RepresentativeAtCourt
+exec sp_AppointTrial 505, 201, 24
+
 
 exec sp_AppointTrial 505, 208, 1
 exec sp_AppointTrial 505, 201, 1
-exec sp_AppointTrial 505, 201, 19

@@ -120,6 +120,7 @@ FOREIGN KEY (CustomerNo) REFERENCES Client(CustomerNo)
 CREATE TABLE Trial(
 TrialNo int PRIMARY KEY,
 TrialType NVARCHAR(50),
+Alias NVARCHAR(30),
 TrialDate date,
 isCaseResolved BIT DEFAULT 0,
 )

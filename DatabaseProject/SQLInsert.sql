@@ -793,53 +793,53 @@ insert into RelevancyPeriod values
 ('2022/08/29',null,  90250),
 ('2022/06/21',null,  90380)
 
-insert into Trial (TrialNo,TrialType,TrialDate) values
-(1, 'Normal', '2022/01/10'),
-(2, 'Normal', '2023/02/10'),
-(3, 'Normal', '2023/02/10'),
-(4, 'Normal', '2023/01/10'),
-(5, 'Normal', '2024/01/10'),
+insert into Trial (TrialNo,TrialType,Alias,TrialDate) values
+(1, 'Normal',NULL, '2022/01/10'),
+(2, 'Normal',NULL, '2023/02/10'),
+(3, 'Normal',NULL, '2023/02/10'),
+(4, 'Normal',NULL, '2023/01/10'),
+(5, 'Normal',NULL, '2024/01/10'),
 
-(6, 'Normal', '2024/03/10'),
+(6, 'Normal',NULL, '2024/03/10'),
 
 
 
-(8, 'Normal', '2023/03/10'),
-(9, 'Normal', '2023/03/10'),
-(10, 'Normal', '2024/04/10'),
+(8, 'Normal',NULL, '2023/03/10'),
+(9, 'Normal',NULL, '2023/03/10'),
+(10, 'Normal',NULL, '2024/04/10'),
 
-(11, 'Normal', '2024/04/10'),
-(12, 'Normal', '2024/05/10'),
-(13, 'Normal', '2023/06/10'),
+(11, 'Normal',NULL, '2024/04/10'),
+(12, 'Normal',NULL, '2024/05/10'),
+(13, 'Normal',NULL, '2023/06/10'),
 
-(14, 'Normal', '2022/04/10'),
+(14, 'Normal',NULL, '2022/04/10'),
 
-(16, 'Normal', '2023/05/10'),
-(18, 'Normal', '2023/06/10'),
-(19, 'Normal', '2023/06/10'),
-(20, 'Normal', '2023/06/10'),
+(16, 'Normal',NULL, '2023/05/10'),
+(18, 'Normal',NULL, '2023/06/10'),
+(19, 'Normal',NULL, '2023/06/10'),
+(20, 'Normal',NULL, '2023/06/10'),
 
-(21, 'Normal', '2023/07/10'),
-(22, 'Normal', '2023/07/10'),
-(23, 'Class Action', '2023/07/10'),
-(24, 'Class Action', '2023/07/10'),
-(25, 'Class Action', '2023/08/10'),
+(21, 'Normal',NULL, '2023/07/10'),
+(22, 'Normal',NULL,'2023/07/10'),
+(23, 'Class Action',NULL, '2023/07/10'),
+(24, 'Class Action',NULL, '2023/07/10'),
+(25, 'Class Action',NULL, '2023/08/10'),
 
-(26, 'Normal', '2023/07/10'),
-(27, 'Normal', '2023/09/15'),
+(26, 'Normal',NULL, '2023/07/10'),
+(27, 'Normal',NULL,'2023/09/15'),
 
-(28, 'Normal', '2023/01/20'),
-(29, 'Normal', '2024/06/17'),
+(28, 'Normal',NULL, '2023/01/20'),
+(29, 'Normal',NULL, '2024/06/17'),
 
-(30, 'Normal', '2023/03/12'),
-(31, 'Normal', '2023/06/12'),
-(32, 'Normal', '2023/09/06')
+(30, 'Normal',NULL, '2023/03/12'),
+(31, 'Normal',NULL, '2023/06/12'),
+(32, 'Normal',NULL, '2023/09/06')
 
 insert into Trial values
-(7, 'Normal', '2023/08/22',1),
-(15, 'Normal', '2023/07/22',1),
-(17, 'Normal', '2022/10/20', 1),
-(33, 'Normal', '2023/12/20', 1)
+(7, 'Normal',NULL,'2023/08/22',1),
+(15, 'Normal',NULL,'2023/07/22',1),
+(17, 'Normal',NULL,'2022/10/20', 1),
+(33, 'Normal',NULL,'2023/12/20', 1)
 
 insert into AssociatedCase values
 (1, 1010),
