@@ -16,7 +16,7 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE EmployeePhoneContact(
- PhoneId NVARCHAR(10) PRIMARY KEY,
+ PhoneId int PRIMARY KEY,
  SSN NVARCHAR(12),
  PhoneNumber NVARCHAR(20) NOT NULL,
  FOREIGN KEY (Ssn) REFERENCES Employee (SSN)
@@ -168,8 +168,8 @@ CREATE TABLE AssociatedCase(
 
 -- INDECES 
 
-CREATE UNIQUE INDEX index_IBAN
-ON Account(IBAN)
+CREATE CLUSTERED INDEX index_AssociatedCase
+ON AssociatedCase(CaseNo)
 
 CREATE INDEX index_Transactions
 ON [Transaction](PaymentId)
